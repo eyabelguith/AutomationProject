@@ -127,7 +127,11 @@ services:
       airflow-init:
         condition: service_completed_successfully
     volumes:
-      - C:\Users\eyawo\airflow-docker\config\airflow.cfg:/opt/airflow/config/airflow.cfg
+      - C:\Users\eyawo\airflow-docker\config\airflow.cfg:/opt/airflow/config/airflow.cfg #bech airflow ycapti script manip
+      #- C:\Users\eyawo\airflow-docker:/opt/airflow
+      - C:\Users\eyawo\airflow-docker\config\airflow.cfg:/opt/airflow/airflow.cfg
+      - C:\Users\eyawo\airflow-docker:/host_data #to solve el data pointing error 
+
       
   airflow-scheduler:
     <<: *airflow-common

@@ -1,6 +1,9 @@
 import pandas as pd
 import numpy as np
 
+csv_file_path = "/host_data/KPI Analysis Result_Query_Result_20240325102721558(KPI Analysis Result).csv"
+
+
 def extract_sector(cell_name):
     parts = cell_name.split('_')
     sector_prefix = '_'.join(parts[:-3])  # all parts except last 3
@@ -26,7 +29,8 @@ def mean_without_null(series):
     return numeric_values.mean()
 
 def main():
-    df1 = pd.read_csv("KPI Analysis Result_Query_Result_20240325102721558(KPI Analysis Result).csv", encoding='latin1', skiprows=6)
+    #df1 = pd.read_csv("KPI Analysis Result_Query_Result_20240325102721558(KPI Analysis Result).csv", encoding='latin1', skiprows=6)
+    df1 = pd.read_csv(csv_file_path, encoding='latin1', skiprows=6)
     df1 = df1.drop(df1.index[-1])
 
     nil_count = df1.apply(lambda x: x.isin(['NIL', 'nil', 'NUL', 'nul'])).sum().sum()
