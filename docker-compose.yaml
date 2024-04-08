@@ -113,6 +113,9 @@ services:
   airflow-webserver:
     <<: *airflow-common
     command: webserver
+    environment:
+       <<: *airflow-common-env
+       AIRFLOW__WEBSERVER__SECRET_KEY: "b7782e8e26127f40477ad73c7edfd4d2" 
     ports:
       - "8080:8080"
     healthcheck:
@@ -129,13 +132,16 @@ services:
     volumes:
       - C:\Users\eyawo\airflow-docker\config\airflow.cfg:/opt/airflow/config/airflow.cfg #bech airflow ycapti script manip
       #- C:\Users\eyawo\airflow-docker:/opt/airflow
-      - C:\Users\eyawo\airflow-docker\config\airflow.cfg:/opt/airflow/airflow.cfg
+      #- C:\Users\eyawo\airflow-docker\config\airflow.cfg:/opt/airflow/airflow.cfg
       - C:\Users\eyawo\airflow-docker:/host_data #to solve el data pointing error 
 
       
   airflow-scheduler:
     <<: *airflow-common
     command: scheduler
+    #environment:
+     # <<: *airflow-common-env
+     # AIRFLOW__WEBSERVER__SECRET_KEY: "b7782e8e26127f40477ad73c7edfd4d2" 
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8974/health"]
       interval: 30s
@@ -151,6 +157,9 @@ services:
   airflow-worker:
     <<: *airflow-common
     command: celery worker
+    #environment:
+      #<<: *airflow-common-env
+      #AIRFLOW__WEBSERVER__SECRET_KEY: "b7782e8e26127f40477ad73c7edfd4d2" 
     healthcheck:
       # yamllint disable rule:line-length
       test:
@@ -174,6 +183,9 @@ services:
   airflow-triggerer:
     <<: *airflow-common
     command: triggerer
+    #environment:
+      #<<: *airflow-common-env
+      #AIRFLOW__WEBSERVER__SECRET_KEY: "b7782e8e26127f40477ad73c7edfd4d2" 
     healthcheck:
       test: ["CMD-SHELL", 'airflow jobs check --job-type TriggererJob --hostname "$${HOSTNAME}"']
       interval: 30s

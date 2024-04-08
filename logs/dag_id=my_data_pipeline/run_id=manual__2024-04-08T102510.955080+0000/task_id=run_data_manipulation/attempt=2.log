@@ -1,0 +1,14 @@
+[2024-04-08T10:30:15.174+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: my_data_pipeline.run_data_manipulation manual__2024-04-08T10:25:10.955080+00:00 [queued]>
+[2024-04-08T10:30:15.181+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: my_data_pipeline.run_data_manipulation manual__2024-04-08T10:25:10.955080+00:00 [queued]>
+[2024-04-08T10:30:15.182+0000] {taskinstance.py:2193} INFO - Starting attempt 2 of 3
+[2024-04-08T10:30:15.192+0000] {taskinstance.py:2217} INFO - Executing <Task(PythonOperator): run_data_manipulation> on 2024-04-08 10:25:10.955080+00:00
+[2024-04-08T10:30:15.196+0000] {standard_task_runner.py:60} INFO - Started process 114 to run task
+[2024-04-08T10:30:15.199+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'my_data_pipeline', 'run_data_manipulation', 'manual__2024-04-08T10:25:10.955080+00:00', '--job-id', '246', '--raw', '--subdir', 'DAGS_FOLDER/my_data_pipeline.py', '--cfg-path', '/tmp/tmpiymws106']
+[2024-04-08T10:30:15.200+0000] {standard_task_runner.py:88} INFO - Job 246: Subtask run_data_manipulation
+[2024-04-08T10:30:15.242+0000] {task_command.py:423} INFO - Running <TaskInstance: my_data_pipeline.run_data_manipulation manual__2024-04-08T10:25:10.955080+00:00 [running]> on host 7b54c249b682
+[2024-04-08T10:30:15.318+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='my_data_pipeline' AIRFLOW_CTX_TASK_ID='run_data_manipulation' AIRFLOW_CTX_EXECUTION_DATE='2024-04-08T10:25:10.955080+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-04-08T10:25:10.955080+00:00'
+[2024-04-08T10:30:15.320+0000] {logging_mixin.py:188} INFO - An error occurred: name 'data_manipulation_main' is not defined
+[2024-04-08T10:30:15.321+0000] {python.py:202} INFO - Done. Returned value was: None
+[2024-04-08T10:30:15.330+0000] {taskinstance.py:1149} INFO - Marking task as SUCCESS. dag_id=my_data_pipeline, task_id=run_data_manipulation, execution_date=20240408T102510, start_date=20240408T103015, end_date=20240408T103015
+[2024-04-08T10:30:15.372+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2024-04-08T10:30:15.388+0000] {taskinstance.py:3312} INFO - 0 downstream tasks scheduled from follow-on schedule check

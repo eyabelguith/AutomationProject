@@ -1,6 +1,7 @@
 import sys
 sys.path.append("C:\\Users\\eyawo\\airflow-docker\\plugins")
-from data_manipulation import main
+#from data_manipulation import main
+from data_manipulation import main as data_manipulation_main
 
 from datetime import datetime
 from airflow import DAG
@@ -13,12 +14,20 @@ from airflow.utils.dates import days_ago
 #from .plugins.data_manipulation import main
 
 
+
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
     'start_date': days_ago(1),
     'retries': 2,
 }
+
+#wrapping
+def safe_main(): #error handling mta3 potential exceptions fil main function
+    try:
+        data_manipulation_main()
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 dag = DAG(
     'my_data_pipeline',
@@ -29,6 +38,6 @@ dag = DAG(
 
 run_data_manipulation = PythonOperator(
     task_id='run_data_manipulation',
-    python_callable=main,
+    python_callable=safe_main,
     dag=dag,
 )
