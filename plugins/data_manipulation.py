@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
-
-csv_file_path = "/host_data/KPI Analysis Result_Query_Result_20240325102721558(KPI Analysis Result).csv"
-
+import os
+#csv_file_path = "/host_data/KPI Analysis Result_Query_Result_20240325102721558(KPI Analysis Result).csv"
+###// kont njib bih data elli 3andi specifiquement
 
 def extract_sector(cell_name):
     parts = cell_name.split('_')
@@ -29,9 +29,20 @@ def mean_without_null(series):
     return numeric_values.mean()
 
 def main():
-    #df1 = pd.read_csv("KPI Analysis Result_Query_Result_20240325102721558(KPI Analysis Result).csv", encoding='latin1', skiprows=6)
+############
+    # partie elli tcherchi 3la dataset elli tebda b KPI
+    directory = "/host_data"
+    files = os.listdir(directory)
+    kpi_files = [f for f in files if f.startswith("KPI")]
+    if not kpi_files:
+        print("No KPI files found in the directory")
+        return
+    csv_file_path = os.path.join(directory, kpi_files[0])
+##############
     df1 = pd.read_csv(csv_file_path, encoding='latin1', skiprows=6)
     df1 = df1.drop(df1.index[-1])
+    
+    
 
     nil_count = df1.apply(lambda x: x.isin(['NIL', 'nil', 'NUL', 'nul'])).sum().sum()
     print("Number of replaced values:", nil_count)
@@ -73,6 +84,7 @@ def main():
     coefficient_variation = (FDD_df['FT_AVE 4G/LTE DL USER THRPUT without Last TTI(ALL) (KBPS)(kbit/s)'].std() / 
                              FDD_df['FT_AVE 4G/LTE DL USER THRPUT without Last TTI(ALL) (KBPS)(kbit/s)'].mean()) * 100
     FDD_df['Coef Var thruput'] = coefficient_variation
-
+    print("Data manipulation completed successfully.")
+    
 if __name__ == "__main__":
     main()
