@@ -1,0 +1,14 @@
+[2024-04-16T08:41:41.597+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: my_data_pipeline.run_data_manipulation scheduled__2024-04-15T00:00:00+00:00 [queued]>
+[2024-04-16T08:41:41.611+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: my_data_pipeline.run_data_manipulation scheduled__2024-04-15T00:00:00+00:00 [queued]>
+[2024-04-16T08:41:41.612+0000] {taskinstance.py:2193} INFO - Starting attempt 1 of 3
+[2024-04-16T08:41:41.637+0000] {taskinstance.py:2217} INFO - Executing <Task(PythonOperator): run_data_manipulation> on 2024-04-15 00:00:00+00:00
+[2024-04-16T08:41:41.647+0000] {standard_task_runner.py:60} INFO - Started process 61 to run task
+[2024-04-16T08:41:41.653+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'my_data_pipeline', 'run_data_manipulation', 'scheduled__2024-04-15T00:00:00+00:00', '--job-id', '259', '--raw', '--subdir', 'DAGS_FOLDER/my_data_pipeline.py', '--cfg-path', '/tmp/tmp7gvqnh29']
+[2024-04-16T08:41:41.655+0000] {standard_task_runner.py:88} INFO - Job 259: Subtask run_data_manipulation
+[2024-04-16T08:41:41.747+0000] {task_command.py:423} INFO - Running <TaskInstance: my_data_pipeline.run_data_manipulation scheduled__2024-04-15T00:00:00+00:00 [running]> on host 262e2d20fff9
+[2024-04-16T08:41:41.871+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='my_data_pipeline' AIRFLOW_CTX_TASK_ID='run_data_manipulation' AIRFLOW_CTX_EXECUTION_DATE='2024-04-15T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-04-15T00:00:00+00:00'
+[2024-04-16T08:41:41.874+0000] {logging_mixin.py:188} INFO - An error occurred: [Errno 2] No such file or directory: '/host_data'
+[2024-04-16T08:41:41.875+0000] {python.py:202} INFO - Done. Returned value was: None
+[2024-04-16T08:41:41.888+0000] {taskinstance.py:1149} INFO - Marking task as SUCCESS. dag_id=my_data_pipeline, task_id=run_data_manipulation, execution_date=20240415T000000, start_date=20240416T084141, end_date=20240416T084141
+[2024-04-16T08:41:41.945+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2024-04-16T08:41:41.972+0000] {taskinstance.py:3312} INFO - 0 downstream tasks scheduled from follow-on schedule check
