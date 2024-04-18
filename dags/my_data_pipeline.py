@@ -2,6 +2,7 @@ import sys
 sys.path.append("C:\\Users\\eyawo\\airflow-docker\\plugins")
 #from data_manipulation import main
 from data_manipulation import main as data_manipulation_main
+from Tdata_manipulation import main as tilt_data_manipulation_main
 
 from datetime import datetime
 from airflow import DAG
@@ -36,8 +37,19 @@ dag = DAG(
     schedule_interval='@daily',
 )
 
+#lel KPI
 run_data_manipulation = PythonOperator(
     task_id='run_data_manipulation',
     python_callable=safe_main,
     dag=dag,
 )
+
+#lel Tilt 
+run_tilt_data_manipulation = PythonOperator(
+    task_id='run_tilt_data_manipulation',
+    python_callable=tilt_data_manipulation_main,
+    dag=dag,
+)
+
+
+run_tilt_data_manipulation.set_upstream(run_data_manipulation)
