@@ -5,7 +5,7 @@ import glob
 #file_path = "/host_data/TILT_DATA.txt"
 
 def main():
-    file_path = next(glob.iglob('*.txt', recursive=False), None)
+    file_path = next(glob.iglob('TILT_DATA.txt', recursive=False), None)
 
     if file_path is None:
         print("No TXT file found in the directory")

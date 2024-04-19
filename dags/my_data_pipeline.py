@@ -3,6 +3,7 @@ sys.path.append("C:\\Users\\eyawo\\airflow-docker\\plugins")
 #from data_manipulation import main
 from data_manipulation import main as data_manipulation_main
 from Tdata_manipulation import main as tilt_data_manipulation_main
+from Pdata_manipulation import main as power_data_manipulation_main
 
 from datetime import datetime
 from airflow import DAG
@@ -51,5 +52,12 @@ run_tilt_data_manipulation = PythonOperator(
     dag=dag,
 )
 
+#lel Power
+run_power_data_manipulation = PythonOperator(
+    task_id='run_power_data_manipulation',
+    python_callable=power_data_manipulation_main,
+    dag=dag,
+)
 
 run_tilt_data_manipulation.set_upstream(run_data_manipulation)
+run_power_data_manipulation.set_upstream(run_tilt_data_manipulation)

@@ -84,6 +84,8 @@ def main():
     coefficient_variation = (FDD_df['FT_AVE 4G/LTE DL USER THRPUT without Last TTI(ALL) (KBPS)(kbit/s)'].std() / 
                              FDD_df['FT_AVE 4G/LTE DL USER THRPUT without Last TTI(ALL) (KBPS)(kbit/s)'].mean()) * 100
     FDD_df['Coef Var thruput'] = coefficient_variation
+    #FDD_df.to_csv('Kpi_output.csv', index=False)
+
     print("Data manipulation completed successfully.")
     
 if __name__ == "__main__":
