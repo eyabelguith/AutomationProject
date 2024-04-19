@@ -89,6 +89,52 @@ def main():
             # Add line to the current block
             current_block.append(line)
 
+
+
+
+    if current_block:
+        site_name = None
+        device_numbers = []
+        device_names = []
+        actual_tilts = []
+        for block_line in current_block:
+            if "NE :" in block_line:
+                site_name = block_line.split("NE :")[1].strip()
+            elif block_line.startswith("Device No."):
+                # Skip header
+                continue
+            else:
+                # Extract device numbers using regular expression
+                matches = re.findall(r'^(\d+)', block_line)
+                if matches:
+                    device_numbers.extend([int(match) for match in matches])
+                    # Extract device names using regular expression
+                    device_name_match = re.search(device_name_pattern, block_line)
+                    if device_name_match:
+                        device_names.append(device_name_match.group())
+                    # Extract actual tilts
+                    tilt_match = re.search(r'AVAILABLE\s+(\d+|NULL)', block_line)
+                    if tilt_match:
+                        tilt_value = tilt_match.group(1)
+                        if tilt_value.isdigit():
+                            actual_tilts.append(int(tilt_value))
+                        else:
+                            actual_tilts.append(tilt_value)
+
+        # Fill in missing values with 'NULL' if lists have different lengths
+        max_length = max(len(device_numbers), len(device_names), len(actual_tilts))
+        device_numbers.extend([None] * (max_length - len(device_numbers)))
+        device_names.extend([None] * (max_length - len(device_names)))
+        actual_tilts.extend([None] * (max_length - len(actual_tilts)))
+
+        # Append to lists
+        site_names_list.extend([site_name] * max_length)
+        device_numbers_list.extend(device_numbers)
+        device_names_list.extend(device_names)
+        actual_tilts_list.extend(actual_tilts)
+
+
+
     # Create a DataFrame from the lists
     dfTILT7 = pd.DataFrame({'Site Name': site_names_list, 'Device No': device_numbers_list, 
                             'Device Name': device_names_list, 'Actual Tilt': actual_tilts_list})
