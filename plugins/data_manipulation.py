@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import os
+import glob
 #csv_file_path = "/host_data/KPI Analysis Result_Query_Result_20240325102721558(KPI Analysis Result).csv"
 ###// kont njib bih data elli 3andi specifiquement
 
@@ -30,14 +31,26 @@ def mean_without_null(series):
 
 def main():
 ############
-    # partie elli tcherchi 3la dataset elli tebda b KPI
-    directory = "/host_data"
-    files = os.listdir(directory)
-    kpi_files = [f for f in files if f.startswith("KPI")]
+    #directory = "/host_data"
+    kpi_files = glob.glob("KPI*.csv")
+
     if not kpi_files:
-        print("No KPI files found in the directory")
+        print("No KPI CSV files found in the directory")
         return
-    csv_file_path = os.path.join(directory, kpi_files[0])
+
+    # Read the first CSV file found
+    csv_file_path = kpi_files[0]
+
+  
+###########
+    # partie elli tcherchi 3la dataset elli tebda b KPI
+    #directory = "/host_data"
+    #files = os.listdir(directory)
+    #kpi_files = [f for f in files if f.startswith("KPI")]
+    #if not kpi_files:
+     #   print("No KPI files found in the directory")
+      #  return
+    #csv_file_path = os.path.join(directory, kpi_files[0])
 ##############
     df1 = pd.read_csv(csv_file_path, encoding='latin1', skiprows=6)
     df1 = df1.drop(df1.index[-1])
@@ -87,6 +100,7 @@ def main():
     #FDD_df.to_csv('Kpi_output.csv', index=False)
 
     print("Data manipulation completed successfully.")
-    
+    FDD_df.to_csv('Kpi_output.csv', index=False)
+  
 if __name__ == "__main__":
     main()
